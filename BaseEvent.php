@@ -6,11 +6,17 @@
  */
 namespace BasicApp\Event;
 
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\NullLogger;
+
 abstract class BaseEvent implements EventInterface
 {
 
+    use LoggerAwareTrait;
+
     public function __construct()
     {
+        $this->setLogger(new NullLogger);
     }
 
 }
