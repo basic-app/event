@@ -8,4 +8,9 @@ namespace BasicApp\Event;
 
 abstract class BaseEvent implements EventInterface
 {
+
+    public function __construct()
+    {
+    }
+
 }
