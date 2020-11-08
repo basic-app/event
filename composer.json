@@ -5,5 +5,8 @@
         "psr-4": {
             "BasicApp\\Event\\" : ""
         }
+    },
+    "require": {
+        "psr/log": "*"
     }
 }
