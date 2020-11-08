@@ -18,14 +18,9 @@ abstract class BaseEvent implements EventInterface
         setLogger as setLoggerTrait;
     }    
 
-    public function __construct(?LoggerInterface $logger = null)
+    public function __construct()
     {
-        if (!$logger)
-        {
-            $logger = new NullLogger;
-        }
-
-        $this->setLogger($logger);
+        $this->setLogger(new NullLogger);
     }
 
     public function setLogger(LoggerInterface $logger)
