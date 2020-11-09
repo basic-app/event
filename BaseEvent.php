@@ -9,14 +9,13 @@ namespace BasicApp\Event;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use Psr\Log\LoggerInterface;
-use CodeIgniter\Events\Events;
 
-abstract class BaseEvent implements EventInterface
+abstract class BaseEvent
 {
 
-    use LoggerAwareTrait {
-        setLogger as setLoggerTrait;
-    }    
+    use TriggerTrait;
+    
+    use LoggerAwareTrait {setLogger as setLoggerTrait;}
 
     public function __construct()
     {
@@ -28,11 +27,6 @@ abstract class BaseEvent implements EventInterface
         $this->setLoggerTrait($logger);
 
         return $this;
-    }
-
-    public function trigger(string $name, ...$params)
-    {
-        return Events::trigger($name, ...$params);
     }
 
 }
