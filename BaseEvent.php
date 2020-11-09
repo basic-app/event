@@ -17,6 +17,8 @@ abstract class BaseEvent
     
     use LoggerAwareTrait {setLogger as setLoggerTrait;}
 
+    protected $_result;
+
     public function __construct()
     {
         $this->setLogger(new NullLogger);
@@ -25,6 +27,18 @@ abstract class BaseEvent
     public function setLogger(LoggerInterface $logger)
     {
         $this->setLoggerTrait($logger);
+
+        return $this;
+    }
+
+    public function getResult()
+    {
+        return $this->_result;
+    }
+
+    public function setResult($result)
+    {
+        $this->_result = $result;
 
         return $this;
     }
