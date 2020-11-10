@@ -11,4 +11,8 @@ abstract class BaseEvent
 
     use TriggerTrait;
 
+    public function __construct()
+    {
+    }
+
 }
