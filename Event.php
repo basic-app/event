@@ -6,9 +6,6 @@
  */
 namespace BasicApp\Event;
 
-abstract class BaseEvent
+class Event extends BaseEvent
 {
-
-    use TriggerTrait;
-
 }
