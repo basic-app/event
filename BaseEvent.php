@@ -9,6 +9,7 @@ namespace BasicApp\Event;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use Psr\Log\LoggerInterface;
+use CodeIgniter\HTTP\RedirectResponse;
 
 abstract class BaseEvent
 {
@@ -34,6 +35,18 @@ abstract class BaseEvent
     public function getResult()
     {
         return $this->_result;
+    }
+
+    public function getRedirect()
+    {
+        $result = $this->getResult();
+
+        if ($result instanceof RedirectResponse)
+        {
+            return $result;
+        }
+
+        return null;
     }
 
     public function setResult($result)
