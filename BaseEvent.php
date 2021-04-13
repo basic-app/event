@@ -6,13 +6,35 @@
  */
 namespace BasicApp\Event;
 
+use Webmozart\Assert\Assert;
+use CodeIgniter\Events\Events;
+
 abstract class BaseEvent
 {
 
-    use TriggerTrait;
-
-    public function __construct()
+    public function __construct(array $params = [])
     {
+        foreach($params as $key => $value)
+        {
+            Assert::propertyExists($this, $key);
+
+            $this->$key = $value;
+        }
+    }
+
+    public static function className()
+    {
+        return get_called_class();
+    }
+
+    public static function on($callback)
+    {
+        return Events::on(static::className(), $callback);
+    }
+
+    public static function trigger(...$params)
+    {
+        return Events::trigger(static::className(), ...$params);
     }
 
 }
