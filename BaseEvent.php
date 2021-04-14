@@ -27,11 +27,11 @@ abstract class BaseEvent implements EventInterface
 
     public static function trigger(...$params) : EventInterface
     {
-        $className = static::eventName();
+        $className = get_called_class();
 
         $event = new $className(...$params);
 
-        Events::trigger($className, $event);
+        Events::trigger($event::eventName(), $event);
     
         return $event;
     }
