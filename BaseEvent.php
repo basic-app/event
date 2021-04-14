@@ -8,30 +8,32 @@ namespace BasicApp\Event;
 
 use CodeIgniter\Events\Events;
 
-abstract class BaseEvent
+abstract class BaseEvent implements EventInterface
 {
 
     public function __construct()
     {
     }
 
-    public static function className()
+    public static function eventName() : string
     {
         return get_called_class();
     }
 
     public static function on($callback)
     {
-        return Events::on(static::className(), $callback);
+        return Events::on(static::eventName(), $callback);
     }
 
-    public static function trigger(...$params)
+    public static function trigger(...$params) : EventInterface
     {
-        $className = static::className();
+        $className = static::eventName();
 
         $event = new $className(...$params);
 
-        return Events::trigger($className, $event);
+        Events::trigger($className, $event);
+    
+        return $event;
     }
 
 }
