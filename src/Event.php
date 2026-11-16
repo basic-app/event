@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 /**
  * @author Basic App Dev Team
  * @license MIT
  */
+
 namespace BasicApp\Event;
 
 use CodeIgniter\Events\Events;
@@ -15,8 +17,7 @@ abstract class Event
 
     public function __construct(array $data = [])
     {
-        foreach($data as $key => $value)
-        {
+        foreach ($data as $key => $value) {
             $this->$key = $value;
         }
     }
@@ -26,23 +27,22 @@ abstract class Event
         $this->afterTrigger = $afterTrigger;
     }
 
-    public function getAfterTrigger() : ?Closure
+    public function getAfterTrigger(): ?Closure
     {
         return $this->afterTrigger ?? null;
     }
 
-    public static function trigger(array $params = []) : Event
+    public static function trigger(array $params = []): Event
     {
         $class = get_called_class();
 
         $event = new $class($params);
-        
+
         Events::trigger($class, $event);
 
         $afterTrigger = $event->getAfterTrigger();
 
-        if ($afterTrigger)
-        {
+        if ($afterTrigger) {
             $afterTrigger->bindTo($event, null)();
         }
 
