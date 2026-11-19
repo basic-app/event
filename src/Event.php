@@ -11,7 +11,7 @@ namespace BasicApp\Event;
 use CodeIgniter\Events\Events;
 use Closure;
 
-abstract class Event
+abstract class Event implements EventInterface
 {
     protected Closure $afterTrigger;
 
@@ -32,7 +32,7 @@ abstract class Event
         return $this->afterTrigger ?? null;
     }
 
-    public static function trigger(array $params = []): Event
+    public static function trigger(array $params = []): EventInterface
     {
         $class = get_called_class();
 
