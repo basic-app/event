@@ -8,7 +8,16 @@ declare(strict_types=1);
 
 namespace BasicApp\Event;
 
-class EventWithItems extends Event
+class EventWithItems extends Event implements EventWithItemsInterface
 {
     use ItemsTrait;
+
+    public static function trigger(array $params = []): static
+    {
+        $event = parent::trigger($params);
+
+        $event->sortItems();
+
+        return $event;
+    }
 }

@@ -12,7 +12,7 @@ interface EventInterface
 {
     public function __construct(array $data = []);
 
-    public static function trigger(array $params = []): EventInterface;
+    public static function trigger(array $params = []): static;
 
     public static function on($callback);
 }

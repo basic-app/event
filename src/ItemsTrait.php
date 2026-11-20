@@ -12,7 +12,12 @@ trait ItemsTrait
 {
     public array $items = [];
 
-    public function addItems(array $items): EventInterface
+    public function sortItems(): void
+    {
+        uasort($this->items, fn($a, $b) => ($a['sort'] ?? 0) <=> ($b['sort'] ?? 0));
+    }
+
+    public function addItems(array $items): static
     {
         $this->items = array_merge(
             $this->items,
@@ -22,7 +27,7 @@ trait ItemsTrait
         return $this;
     }
 
-    public function prependItems(array $items): EventInterface
+    public function prependItems(array $items): static
     {
         $this->items = array_merge(
             $items,
